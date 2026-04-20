@@ -1,19 +1,692 @@
+/* style.css - The Little Taco Shop */
+/* A vibrant, food-themed, animated stylesheet */
+
+/* ---------- CSS RESET & BASE ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
-    font-size: 22px;
+  scroll-behavior: smooth;
 }
 
 body {
-    min-height: 100vh;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1rem;
-    border-left: 1px solid #333;
-    border-right: 1px solid #333;
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe0b5 100%);
+  font-family:
+    "Segoe UI",
+    "Poppins",
+    system-ui,
+    -apple-system,
+    "Roboto",
+    sans-serif;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-left: 8px solid #ff8c42;
+  border-right: 8px solid #ff8c42;
+  box-shadow: 0 0 40px rgba(255, 140, 66, 0.2);
+  animation: pageGlow 4s infinite alternate;
 }
 
-th, td, caption {
-    border: 1px solid #333;
-    font-family: 'Courier New', Courier, monospace;
-    border-collapse: separate;
-    padding: 0.5rem;
+@keyframes pageGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 140, 66, 0.2);
+    border-left-color: #ff8c42;
+    border-right-color: #ff8c42;
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(255, 107, 53, 0.5);
+    border-left-color: #ff5722;
+    border-right-color: #ff5722;
+  }
+}
+
+/* ---------- TYPOGRAPHY & TEXT ANIMATIONS ---------- */
+h1 {
+  font-size: 3rem;
+  background: linear-gradient(135deg, #d35400, #ff8c42, #ff6b3d);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.5px;
+  animation:
+    textShimmer 3s linear infinite,
+    bounceIn 0.8s ease-out;
+  text-shadow: 2px 2px 10px rgba(255, 140, 66, 0.3);
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) rotate(2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+h2 {
+  font-size: 2rem;
+  color: #c0392b;
+  border-left: 8px solid #ff8c42;
+  padding-left: 1rem;
+  margin: 2rem 0 1rem 0;
+  position: relative;
+  animation: slideInLeft 0.6s ease-out;
+  background: linear-gradient(90deg, #fff0e0, transparent);
+}
+
+h2::before {
+  content: "🌮";
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  opacity: 0;
+  animation: popIn 0.5s ease-out 0.3s forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+  }
+}
+
+h3 {
+  color: #e67e22;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    color: #e67e22;
+  }
+  50% {
+    transform: scale(1.02);
+    color: #ff8c42;
+  }
+}
+
+/* ---------- NAVIGATION BAR ---------- */
+nav {
+  background: linear-gradient(135deg, #ff8c42, #ff6b3d);
+  border-radius: 60px;
+  padding: 0.8rem 2rem;
+  margin: 1rem 0 2rem 0;
+  box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+  animation: navGlow 2s infinite alternate;
+}
+
+@keyframes navGlow {
+  from {
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+  }
+  to {
+    box-shadow: 0 15px 30px rgba(255, 107, 53, 0.6);
+  }
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+nav a:hover {
+  background: white;
+  color: #ff6b3d;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+nav a::after {
+  content: "🌮";
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
+}
+
+nav a:hover::after {
+  transform: translateY(-50%) scale(1);
+}
+
+/* ---------- FIGURE & IMAGES ---------- */
+figure {
+  text-align: center;
+  margin: 2rem 0;
+  position: relative;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 40px;
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  border: 4px solid #ffd89a;
+}
+
+img:hover {
+  transform: scale(1.02) rotate(1deg);
+  box-shadow: 0 30px 50px rgba(255, 107, 53, 0.4);
+  border-color: #ff8c42;
+}
+
+figcaption {
+  margin-top: 0.8rem;
+  font-style: italic;
+  color: #d35400;
+  font-weight: bold;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- LINKS & BUTTONS ---------- */
+a {
+  color: #e67e22;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+a:not(nav a):hover {
+  color: #c0392b;
+  text-decoration: underline;
+  transform: translateX(5px);
+}
+
+button,
+.button,
+[type="submit"],
+[type="reset"] {
+  background: linear-gradient(135deg, #ff8c42, #ff5722);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.5rem;
+  box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+  animation: buttonPulse 2s infinite;
+}
+
+@keyframes buttonPulse {
+  0%,
+  100% {
+    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 25px rgba(255, 87, 34, 0.7);
+  }
+}
+
+button:hover,
+[type="submit"]:hover,
+[type="reset"]:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: linear-gradient(135deg, #ff9f5e, #ff7043);
+  box-shadow: 0 12px 25px rgba(255, 87, 34, 0.5);
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+/* ---------- TABLE STYLES ---------- */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255, 248, 235, 0.9);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin: 1.5rem 0;
+  animation: fadeInScale 0.7s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #ffe0b5;
+  transition: all 0.2s ease;
+}
+
+th {
+  background: linear-gradient(135deg, #ff8c42, #ff6b3d);
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+tr:hover td {
+  background: #fff3e0;
+  transform: scale(1.01);
+}
+
+td {
+  color: #5a3a22;
+  font-weight: 500;
+}
+
+caption {
+  background: #ff8c42;
+  color: white;
+  padding: 0.8rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 20px 20px 0 0;
+  caption-side: top;
+}
+
+tfoot td {
+  background: #ffe0b5;
+  font-weight: bold;
+  color: #c0392b;
+}
+
+/* ---------- FORM STYLES ---------- */
+fieldset {
+  border: 3px dashed #ff8c42;
+  border-radius: 30px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  background: rgba(255, 255, 245, 0.7);
+  animation: borderPulse 3s infinite;
+}
+
+@keyframes borderPulse {
+  0%,
+  100% {
+    border-color: #ff8c42;
+    border-style: dashed;
+  }
+  50% {
+    border-color: #ff5722;
+    border-style: solid;
+  }
+}
+
+legend {
+  background: #ff8c42;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 40px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+label {
+  font-weight: bold;
+  color: #c0392b;
+  display: inline-block;
+  margin-bottom: 0.3rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ffd89a;
+  border-radius: 20px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #ff8c42;
+  box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.3);
+  transform: scale(1.01);
+}
+
+/* ---------- ASIDE & DETAILS ---------- */
+aside {
+  background: linear-gradient(145deg, #fff3e6, #ffe8d4);
+  border-left: 12px solid #ff8c42;
+  border-radius: 28px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  animation: slideInRight 0.7s ease-out;
+  transition: all 0.3s ease;
+}
+
+aside:hover {
+  transform: translateX(5px);
+  box-shadow: -5px 5px 20px rgba(255, 140, 66, 0.2);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+details {
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+summary {
+  font-weight: bold;
+  color: #d35400;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+  list-style: none;
+  position: relative;
+  padding-left: 25px;
+}
+
+summary::before {
+  content: "🌮";
+  position: absolute;
+  left: 0;
+  transition: transform 0.3s;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+summary:hover {
+  color: #ff8c42;
+  transform: scale(1.02);
+}
+
+/* ---------- DL LIST (HOURS) ---------- */
+dl {
+  background: rgba(255, 240, 220, 0.8);
+  border-radius: 30px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+dt {
+  font-weight: bold;
+  color: #c0392b;
+  font-size: 1.3rem;
+  margin-top: 0.8rem;
+  border-left: 6px solid #ff8c42;
+  padding-left: 1rem;
+  animation: slideInLeft 0.4s ease-out;
+}
+
+dd {
+  margin-left: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: #5a3a22;
+  font-size: 1.1rem;
+}
+
+/* ---------- ADDRESS ---------- */
+address {
+  background: #fff5e6;
+  padding: 1.5rem;
+  border-radius: 30px;
+  font-style: normal;
+  line-height: 1.8;
+  border: 2px solid #ffd89a;
+  transition: all 0.3s;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+address:hover {
+  border-color: #ff8c42;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 140, 66, 0.2);
+}
+
+/* ---------- HR DIVIDERS ---------- */
+hr {
+  border: none;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ff8c42,
+    #ff5722,
+    #ff8c42,
+    transparent
+  );
+  margin: 2rem 0;
+  border-radius: 5px;
+  animation: hrExpand 1.5s ease-out;
+}
+
+@keyframes hrExpand {
+  from {
+    width: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* ---------- BACK TO TOP LINK ---------- */
+p a[href="#"] {
+  display: inline-block;
+  background: #ff8c42;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 40px;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  animation: float 3s infinite;
+}
+
+p a[href="#"]:hover {
+  background: #ff5722;
+  transform: translateY(-3px) scale(1.05);
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(255, 87, 34, 0.4);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  text-align: center;
+  padding: 2rem 0 1rem 0;
+  color: #c0392b;
+  font-weight: bold;
+  position: relative;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+footer p {
+  animation: pulse 3s infinite;
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+    border-left-width: 4px;
+    border-right-width: 4px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  nav ul {
+    gap: 0.8rem;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  th,
+  td {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  fieldset {
+    padding: 1rem;
+  }
+}
+
+/* ---------- CUSTOM SCROLLBAR (Food themed) ---------- */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffe0b5;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ff8c42, #ff5722);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ffa05e, #ff7043);
+}
+
+/* ---------- SELECTION STYLES ---------- */
+::selection {
+  background: #ff8c42;
+  color: white;
+}
+
+/* ---------- PRINT STYLES ---------- */
+@media print {
+  body {
+    border: none;
+    animation: none;
+  }
+
+  nav,
+  button,
+  .button,
+  [type="submit"],
+  [type="reset"] {
+    display: none;
+  }
+
+  img {
+    filter: grayscale(100%);
+  }
 }
